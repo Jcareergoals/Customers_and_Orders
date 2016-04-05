@@ -1,0 +1,10 @@
+body {
+	background-color: rgb(250,250,250);
+}
+
+.customer_btn {float: right; } 
+.table_div {
+	max-height: 300px; 
+	overflow: auto; 
+}
+.table {background-color: rgb(240,240,240);}
