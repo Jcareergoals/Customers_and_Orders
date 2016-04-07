@@ -9,6 +9,9 @@ app.use(express.static(path.join(__dirname, './clients')));
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json()); 
 
+require('./server/models/store.js'); 
+require('./server/config/routes.js')(app); 
+
 app.listen('8000', function(){
 	console.log("Listening at port: 8000");
 }); 

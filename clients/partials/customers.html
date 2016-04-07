@@ -1,5 +1,6 @@
-<div ng-controller='customersController'>	
+<div ng-controller='c_controller'>	
 	<div class="col-xs-10 col-xs-offset-1">
+		<div class="col-xs-12"><a href="#/orders">Orders</a> | <a href="#/">Customers</a></div>
 		<form class="form form-horizontal col-xs-6">
 			<caption>Add a new customer</caption>
 			<div class="form-group">
@@ -11,7 +12,7 @@
 			</div>
 		</form>
 		<div class="col-xs-2 col-xs-offset-10">
-			<input type='text' class='form-control' placeholder='search name...' ng-model='filterName'>
+			<input type='text' class='form-control' placeholder='search name...' ng-model='filterCustomer'>
 		</div>
 	</div>
 	<div class="col-xs-10 col-xs-offset-1">
@@ -22,12 +23,12 @@
 					<th>Created Date</th>
 					<th>Actions</th>
 				</tr>	
-				<tr ng-repeat='x in customers | filter:filterName'>
-					<td></td>
-					<td></td>
-					<td class='col-xs-2'><button class='btn btn-danger' ng-click='removeCustomer(x)'>Remove</button></td>
+				<tr ng-repeat='x in customers | filter:filterCustomer'>
+					<td>{{ x.name }}</td>
+					<td>{{ x.creation_date }}</td>
+					<td class='col-xs-2'><button class='btn btn-danger' ng-click='delete(x)'>Remove</button></td>
 				</tr>
 			</table>
 		</div>
 	</div>
-</div>
+</div> 

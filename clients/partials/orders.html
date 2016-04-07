@@ -1,6 +1,6 @@
-<div ng-controller='ordersController'>
+<div>
 	<div class="col-xs-10 col-xs-offset-1">
-		<div class="col-xs-12"><a href="">Orders</a> | <a href="">Customers</a></div>
+		<div class="col-xs-12"><a href="#/orders">Orders</a> | <a href="#/">Customers</a></div>
 		<form class='form form-horizontal col-xs-6'>
 			<caption>Add a new order</caption>
 			<div class="form-group">
@@ -25,13 +25,13 @@
 				</div>
 			</div>
 			<div class="form-group col-xs-7">
-				<button class='btn btn-primary customer_btn' ng-click='addOrder()'>Order</button>
+				<button class='btn btn-primary customer_btn' >Order</button>
 			</div>
 		</form>
 	</div>
 	<div class="col-xs-10 col-xs-offset-1">
 		<div class="col-xs-2 col-xs-offset-10">
-			<input type='text' class='form-control' placeholder='filter' ng-model='filterOrders'>
+			<input type='text' class='form-control' placeholder='filter' >
 		</div>
 		<div class="col-xs-12 table_div">
 			<table class='table table-striped table-hover table-bordered'>
@@ -41,7 +41,7 @@
 					<th>Quantity</th>
 					<th>Date</th>
 				</tr>	
-				<tr ng-repeat='x in orders | filter:filterOrders'>
+				<tr >
 					<td></td>
 					<td></td>
 					<td></td>
