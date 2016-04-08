@@ -1,37 +1,54 @@
-<div>
+<div ng-controller='OrdersController' class='container-fluid'>
 	<div class="col-xs-10 col-xs-offset-1">
-		<div class="col-xs-12"><a href="#/orders">Orders</a> | <a href="#/">Customers</a></div>
+		<div class="col-xs-12"><a href="#/orders" class='bold'>Orders</a> | <a href="#/">Customers</a></div>
 		<form class='form form-horizontal col-xs-6'>
 			<caption>Add a new order</caption>
 			<div class="form-group">
 				<label for='customer' class='control-label col-xs-2'>Customer</label>
 				<div class="col-xs-5">
-					<select id='customer' class='form-control'>
-						<option></option>
+					<select id='customer' class='form-control' ng-model='newOrder.customer'>
+						<option ng-repeat='customer in customers' value='{{ customer.name }}'>{{ customer.name }}</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for='quantity' class='control-label col-xs-2'>Order</label>
-				<div class="col-xs-2">
-					<select id='quantity' class='form-control'>
-						<option></option>
+				<div class="col-xs-3 col-sm-2">
+					<select id='quantity' class='form-control' ng-model='newOrder.quantity'>
+						<option value=1>1</option>
+						<option value=2>2</option>
+						<option value=3>3</option>
+						<option value=4>4</option>
+						<option value=5>5</option>
+						<option value=6>6</option>
+						<option value=7>7</option>
+						<option value=8>8</option>
+						<option value=9>9</option>
+						<option value=10>10</option>
+						<option value=11>11</option>
+						<option value=12>12</option>
+						<option value=13>13</option>
+						<option value=14>14</option>
+						<option value=15>15</option>
 					</select>
 				</div>
 				<div class="col-xs-3">
-					<select class='form-control'>	
-						<option></option>
+					<select class='form-control' ng-model='newOrder.product'>	
+						<option ng-repeat='p in products' value='{{ p.name }}'>{{ p.name }}</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group col-xs-7">
-				<button class='btn btn-primary customer_btn' >Order</button>
+				<button class='btn btn-primary customer_btn' ng-click='addOrder()'>Order</button>
 			</div>
 		</form>
 	</div>
+	<!-- display errors --> 
+	<span class='col-xs-4 col-xs-offset-4 error'>{{ error }}</span>
+
 	<div class="col-xs-10 col-xs-offset-1">
 		<div class="col-xs-2 col-xs-offset-10">
-			<input type='text' class='form-control' placeholder='filter' >
+			<input type='text' class='form-control' placeholder='filter' ng-model='filterName'>
 		</div>
 		<div class="col-xs-12 table_div">
 			<table class='table table-striped table-hover table-bordered'>
@@ -41,11 +58,11 @@
 					<th>Quantity</th>
 					<th>Date</th>
 				</tr>	
-				<tr >
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+				<tr ng-repeat='x in orders | filter: filterName'>
+					<td>{{ x.customer }}</td>
+					<td>{{ x.product }}</td>
+					<td>{{ x.quantity }}</td>
+					<td class='col-xs-4'>{{ x.date }}</td>
 				</tr>
 			</table>
 		</div>

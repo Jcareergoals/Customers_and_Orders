@@ -1,6 +1,6 @@
-<div ng-controller='c_controller'>	
+<div ng-controller='CustomersController' class='container-fluid'>	 
 	<div class="col-xs-10 col-xs-offset-1">
-		<div class="col-xs-12"><a href="#/orders">Orders</a> | <a href="#/">Customers</a></div>
+		<div class="col-xs-12"><a href="#/orders">Orders</a> | <a href="#/" class='bold'>Customers</a></div>
 		<form class="form form-horizontal col-xs-6">
 			<caption>Add a new customer</caption>
 			<div class="form-group">
@@ -11,6 +11,9 @@
 				<button type='submit' class='btn btn-primary' ng-click='addCustomer()'>Add</button>
 			</div>
 		</form>
+		<div class="col-xs-12">
+			<span ng-repeat='c in customers' class='error col-xs-4 col-xs-offset-4'>{{ c.error }}</span>
+		</div>
 		<div class="col-xs-2 col-xs-offset-10">
 			<input type='text' class='form-control' placeholder='search name...' ng-model='filterCustomer'>
 		</div>

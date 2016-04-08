@@ -12,10 +12,20 @@ module.exports = function(app){
 		var customer = new Customer({
 			name:req.body.name
 		});
-		customer.save(); 
-		Customer.find({}, function(err, data){
-			res.json(data); 
-		});
+		Customer.find({name: req.body.name}, function(err, data){
+			if(data.length > 0){
+				Customer.find({}, function(err, data){
+					var error = {error:"This name already exists"};
+					data.push(error); 
+					res.json(data);
+				}); 
+			} else {
+				customer.save(); 
+				Customer.find({}, function(err, data){
+					res.json(data);
+				});
+			}
+		}); 
 	}); 
 	app.post('/customer/remove', function(req, res){
 		Customer.remove({_id:req.body._id}, function(){
