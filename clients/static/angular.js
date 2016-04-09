@@ -11,8 +11,8 @@ store.config(function($routeProvider){
 }); 
 
 // FACTORIES 
-
-// ******* customers factory ******** 
+ 
+// ******* customers factory ********   1
 store.factory('CustomersFactory', function($http){
 	var factory = {}; 
 	// get customers
@@ -24,7 +24,6 @@ store.factory('CustomersFactory', function($http){
 	// add customers
 	factory.addCustomer = function(newCustomer, callback){
 		$http.post('/customers', newCustomer).success(function(data){
-			console.log(data);
 			callback(data); 
 		}); 
 	}
@@ -36,7 +35,7 @@ store.factory('CustomersFactory', function($http){
 	}
 	return factory; 
 }); 
-// ******** orders factory ********
+// ******** orders factory ********  2
 store.factory('OrdersFactory', function($http){
 	var factory = {}; 
 	var products = [
@@ -53,7 +52,9 @@ store.factory('OrdersFactory', function($http){
 		callback(orders);
 	}
 	factory.getProducts = function(callback){
-		callback(products); 
+		$http.get('/products', function(data){
+			callback(products); 
+		}); 
 	}
 	factory.addOrder = function(order){
 		orders.push(order); 
@@ -63,7 +64,7 @@ store.factory('OrdersFactory', function($http){
 
 // CONTROLLERS
 
-// ******** customers controller ********
+// ******** customers controller ********  1
 store.controller('CustomersController', function($scope, CustomersFactory){
 	$scope.customers = []; 
 	CustomersFactory.index(function(data){
@@ -82,9 +83,9 @@ store.controller('CustomersController', function($scope, CustomersFactory){
 		});
 	}
 }); 
-// ******** orders controller *********
+// ******** orders controller *********  2
 store.controller('OrdersController', function($scope, OrdersFactory, CustomersFactory){
-	$scope.customers, $scope.products, $scope.orders = []; 
+	$scope.orders, $scope.products, $scope.customers = []; 
 	CustomersFactory.index(function(data){
 		$scope.customers = data; 
 	}); 
@@ -96,11 +97,10 @@ store.controller('OrdersController', function($scope, OrdersFactory, CustomersFa
 	}); 
 	$scope.addOrder = function(){
 		if($scope.newOrder && $scope.newOrder.customer && $scope.newOrder.product && $scope.newOrder.quantity){
-			$scope.newOrder.date = Date();
 			OrdersFactory.addOrder($scope.newOrder);	 
 			$scope.newOrder = {}; 
 		} else {
-			$scope.error = "Make sure all fields have a value"; 
+			$scope.error = "Make sure all fields are filled";
 		}
 	}
 }); 
