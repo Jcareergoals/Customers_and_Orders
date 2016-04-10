@@ -1,20 +1,17 @@
 var mongoose = require('mongoose');
-var Customer = mongoose.model('Customer');
 var Orders = mongoose.model('Orders');
-
-var products = [{name:"Iphone"},{name:"Laptop"},
-				{name:"Xbox360"},{name:"Nike Shoes"},
-				{name:"Sunglasses"},{name:"BlueTooth Player"},
-				{name:"Television"},{name:"Ipod"}]; 
 
 module.exports = {
 	index: function(req, res){
-
-	}
-	create: function(req, res){
-
-	}
-	delete: function(req, res){
-		
+		Orders.find({}, function(err, data){
+			res.json(data);
+		}); 
+	},
+	create: function(req, res){ 
+		var order = new Orders(req.body);
+		order.save();
+		Orders.find({}, function(err, data){
+			res.json(data);
+		}); 
 	}
 }
