@@ -26,7 +26,7 @@
 					<th>Created Date</th>
 					<th>Actions</th>
 				</tr>	
-				<tr ng-repeat='x in customers | filter:filterCustomer'>
+				<tr ng-repeat='x in customers | filter:filterCustomer | orderBy:"-creation_date"'>
 					<td>{{ x.name }}</td>
 					<td class='col-xs-4'>{{ x.creation_date | date:'medium'}}</td>
 					<td class='col-xs-2'><button class='btn btn-danger' ng-click='delete(x)'>Remove</button></td>

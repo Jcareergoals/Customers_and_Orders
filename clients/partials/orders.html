@@ -58,7 +58,7 @@
 					<th>Quantity</th>
 					<th>Date</th>
 				</tr>	
-				<tr ng-repeat='x in orders | filter: filterName'>
+				<tr ng-repeat='x in orders | filter: filterName | orderBy:"-date"'>
 					<td>{{ x.customer }}</td>
 					<td>{{ x.product }}</td>
 					<td>{{ x.quantity }}</td>
