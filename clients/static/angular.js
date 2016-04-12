@@ -4,7 +4,7 @@ var store = angular.module('store', ['ngRoute']);
 store.config(function($routeProvider){
 	$routeProvider
 		// .when('/', {templateUrl:'./../partials/dashboard.html'})
-		.when('/', {templateUrl:'./../partials/customers.html'})
+		.when('/', {templateUrl:'./../partials/products.html'})
 		.when('/products', {templateUrl:'./../partials/products.html'})
 		.when('/orders', {templateUrl:'./../partials/orders.html'})
 		.when('/customers', {templateUrl:'./../partials/customers.html'})
@@ -20,7 +20,6 @@ store.factory('CustomersFactory', function($http){
 	var factory = {}; 
 	factory.index = function(callback){
 		$http.get('/customers').success(function(data){
-			console.log(data);
 			callback(data);
 		}); 
 	} 
@@ -39,7 +38,6 @@ store.factory('CustomersFactory', function($http){
 // ******** orders factory ********  2
 store.factory('OrdersFactory', function($http){
 	var factory = {}; 
-	// var orders = []; 
 	factory.index = function(callback){
 		$http.get('/orders').success(function(data){
 			callback(data);
@@ -52,10 +50,24 @@ store.factory('OrdersFactory', function($http){
 	}
 	return factory; 
 });
+store.factory('ProductsFactory', function($http){
+	var factory = {}; 
+	factory.index = function(callback){
+		$http.get('/products').success(function(data){
+			callback(data);
+		}); 
+	}
+	factory.create = function(data, callback){
+		$http.post('/products', data).success(function(data){
+			callback(data);
+		}); 
+	}
+	return factory; 
+}); 
 
 // CONTROLLERS
 
-// ******** customers controller ********  1
+// ******** customers controller ****** 1
 store.controller('CustomersController', function($scope, CustomersFactory){
 	$scope.customers = []; 
 	CustomersFactory.index(function(data){
@@ -73,18 +85,18 @@ store.controller('CustomersController', function($scope, CustomersFactory){
 		});
 	}
 }); 
-// ******** orders controller *********  2
-store.controller('OrdersController', function($scope, OrdersFactory, CustomersFactory){
+// ******** orders controller ********* 2
+store.controller('OrdersController', function($scope, OrdersFactory, CustomersFactory, ProductsFactory){
 	$scope.orders, $scope.customers = []; 
-	$scope.products = [{name:"Iphone"},{name:"Laptop"},{name:"Xbox360"},{name:"Nike Shoes"},
-	                   {name:"Sunglasses"},{name:"BlueTooth Player"},{name:"Television"}]; 
 	CustomersFactory.index(function(data){
-		console.log("it's working", data); 
 		$scope.customers = data; 
 	}); 
 	OrdersFactory.index(function(data){
 		$scope.orders = data; 
 	});
+	ProductsFactory.index(function(data){
+		$scope.products = data; 
+	}); 
 	$scope.addOrder = function(){
 		if($scope.newOrder && $scope.newOrder.customer && $scope.newOrder.product && $scope.newOrder.quantity){
 			OrdersFactory.addOrder($scope.newOrder, function(data){
@@ -93,6 +105,23 @@ store.controller('OrdersController', function($scope, OrdersFactory, CustomersFa
 			});	 
 		} else {
 			$scope.error = "Make sure all fields are filled";
+		}
+	}
+}); 
+// ******** products controller ******* 3
+store.controller('ProductsController', function($scope, ProductsFactory){
+	// $scope.products = []; 
+	ProductsFactory.index(function(data){
+		$scope.products = data;
+	}); 
+	$scope.addProduct = function(){
+		if($scope.newProduct && $scope.newProduct.name && $scope.newProduct.url && $scope.newProduct.quantity){
+			ProductsFactory.create($scope.newProduct, function(data){
+				$scope.products = data; 
+				$scope.newProduct = {}; 
+			});
+		} else {
+			$scope.error = "Please make sure 'name', 'image', and 'initial quantity' fields are filled";
 		}
 	}
 }); 

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'); 
 var OrdersController = require('./../controllers/orders.js'); 
 var CustomersController = require('./../controllers/customers.js'); 
-// var customers = [{name:"josue"},{name:"john"},{name:"angelita"}]; 
+var ProductsController = require('./../controllers/products.js');
 
 module.exports = function(app){
 	app		// Customers Routes
@@ -21,5 +21,13 @@ module.exports = function(app){
 		})
 		.post('/orders', function(req, res){
 			OrdersController.create(req, res) 
+		})
+
+		// Products Routes 
+		.get('/products', function(req, res){
+			ProductsController.index(req, res)
+		})
+		.post('/products', function(req, res){
+			ProductsController.create(req, res)
 		})
 }
