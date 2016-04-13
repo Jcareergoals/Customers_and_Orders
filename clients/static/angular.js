@@ -3,13 +3,12 @@ var store = angular.module('store', ['ngRoute']);
 // ANGULAR ROUTES
 store.config(function($routeProvider){
 	$routeProvider
-		// .when('/', {templateUrl:'./../partials/dashboard.html'})
-		.when('/', {templateUrl:'./../partials/products.html'})
+		.when('/', {templateUrl:'./../partials/dashboard.html'})
 		.when('/products', {templateUrl:'./../partials/products.html'})
 		.when('/orders', {templateUrl:'./../partials/orders.html'})
 		.when('/customers', {templateUrl:'./../partials/customers.html'})
 		.otherwise({
-			redirectTo:"/"
+			redirectTo:'/'
 		})
 }); 
 
