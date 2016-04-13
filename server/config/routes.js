@@ -31,3 +31,5 @@ module.exports = function(app){
 			ProductsController.create(req, res)
 		})
 }
+
+// file location: /server/config/routes.js

@@ -24,3 +24,5 @@ module.exports = {
 		}); 
 	}
 }
+
+// file location: /server/controllers/products.js

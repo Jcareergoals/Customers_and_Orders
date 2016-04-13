@@ -148,3 +148,5 @@ store.controller('DashboardController', function($scope, OrdersFactory, Customer
 		// console.log("products", data);
 	}); 
 }); 
+
+// File location: /clients/angular.js

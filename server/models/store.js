@@ -22,3 +22,5 @@ var ProductsSchema = new mongoose.Schema({
 mongoose.model('Customer', CustomerSchema); 
 mongoose.model('Orders', OrdersSchema);
 mongoose.model('Products', ProductsSchema);
+
+// file location: /server/models/store.js

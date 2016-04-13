@@ -17,3 +17,6 @@ require('./server/config/routes.js')(app);
 app.listen('8000', function(){
 	console.log("Listening at port: 8000");
 }); 
+
+
+// file location: /server.js
