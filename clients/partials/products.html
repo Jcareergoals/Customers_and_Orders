@@ -26,7 +26,7 @@
 					<input type='text' name='url' class='form-control' placeholder='http://' ng-model='newProduct.url'>
 				</div>
 				<div class="form-group">
-					<a href="https://www.google.com/imghp?hl=en&tab=wi&ei=ZrwNV5-OPMOXmwHxwKqwDQ&ved=0EKouCBYoAQ">Google Images</a>
+					<a href="https://www.google.com/imghp?hl=en&tab=wi&ei=ZrwNV5-OPMOXmwHxwKqwDQ&ved=0EKouCBYoAQ" target='_blank'>Google Images</a>
 				</div>
 				<div class="form-group">
 					<label for='description' class='control-label'>Description:</label>
@@ -68,7 +68,7 @@
 			</form>
 		</div>
 		<div class="col-xs-9 col-sm-10">
-			<div class="product" ng-repeat='p in products | filter:filterName'>
+			<div class="product" ng-repeat='p in products | filter:filterName | limitTo:limitValue'>
 				<img src="{{ p.url }}" height='100px' width='100px' alt='{{ p.name }}'>
 				<div>
 					<label>{{ p.name }}</label>
@@ -76,7 +76,7 @@
 				</div>
 			</div>
 			<div class="col-xs-12">
-				<a href="" class='col-xs-2 col-xs-offset-5'>show more</a>
+				<a href="" class='col-xs-2 col-xs-offset-5' ng-click="showMore()">show more</a>
 			</div>
 		</div>
 	</div>

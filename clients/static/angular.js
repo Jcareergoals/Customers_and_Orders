@@ -109,7 +109,8 @@ store.controller('OrdersController', function($scope, OrdersFactory, CustomersFa
 }); 
 // ******** products controller ******* 3
 store.controller('ProductsController', function($scope, ProductsFactory){
-	// $scope.products = []; 
+	$scope.products = []; 
+	$scope.limitValue = 8;
 	ProductsFactory.index(function(data){
 		$scope.products = data;
 	}); 
@@ -118,9 +119,29 @@ store.controller('ProductsController', function($scope, ProductsFactory){
 			ProductsFactory.create($scope.newProduct, function(data){
 				$scope.products = data; 
 				$scope.newProduct = {}; 
+				$scope.error = '';
 			});
 		} else {
 			$scope.error = "Please make sure 'name', 'image', and 'initial quantity' fields are filled";
+			console.log($scope.newProduct); 
 		}
 	}
+	$scope.showMore = function(){
+		$scope.limitValue = ''; 
+	}
+}); 
+store.controller('DashboardController', function($scope, OrdersFactory, CustomersFactory, ProductsFactory){
+	$scope.products, $scope.orders, $scope.products = []; 
+	OrdersFactory.index(function(data){
+		$scope.orders = data; 
+		// console.log("orders",data);
+	}); 
+	CustomersFactory.index(function(data){
+		$scope.customers = data; 
+		// console.log("customers", data);
+	}); 
+	ProductsFactory.index(function(data){
+		$scope.products = data;
+		// console.log("products", data);
+	}); 
 }); 
