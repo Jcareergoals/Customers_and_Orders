@@ -102,6 +102,9 @@ store.controller('OrdersController', function($scope, OrdersFactory, CustomersFa
 				$scope.orders = data; 
 				$scope.newOrder = {}; 
 			});	 
+			ProductsFactory.index(function(data){
+				$scope.products = data; 
+			}); 
 		} else {
 			$scope.error = "Make sure all fields are filled";
 		}
